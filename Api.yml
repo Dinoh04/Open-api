@@ -1,7 +1,10 @@
 openapi: 3.0.0
 info:
-  title: Student API
-  version: "1.2"
+  title: Onboarding
+  version: '1.2'
+  description: STD22040
+servers : 
+- url: https://STD22040.com
 paths:
   /student:
     get:
