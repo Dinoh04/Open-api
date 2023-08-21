@@ -1,24 +1,63 @@
 openapi: 3.0.0
 info:
   title: Onboarding
-  version: '1.2'
+  version: "1.2"
   description: STD22040
 servers : 
 - url: https://STD22040.com
 paths:
-  /student:
+  /Teachers:
     get:
-      description: Get a student
+      description: Get a teacher
       responses:
         '200':
-          description: Student found
+          description: Teacher found
           content:
             application/json:
-              schema:
-                $ref: "#/components/schemas/student"
+              example:
+               - id: 1
+                 name: Toky Ramarozaka
+                 cours : Algorithmie
+                 code du cours : prog1,prog2
+                 durée du cours : 2h/jour
+               - id: 2
+                 name: Toky Ramarozaka
+                 cours : Base de donnée
+                 code du cours : donnée1
+                 durée du cours : 2h/jour
+               - id: 3
+                 name: Toky Ramarozaka
+                 cours : Dévéloppement web
+                 code du cours : web1,web2
+                 durée du cours : 2h/jour
+               - id: 4
+                 name: Ryan
+                 cours : Api
+                 code du cours : Api
+                 durée du cours : 2h/jour
+               - id: 5
+                 name: Sandrine Ramaroson
+                 cours : Travail collaboratif
+                 code du cours : Mgt1
+                 durée du cours : 2h/jour
+               - id: 6
+                 name: Sandrine Ramaroson
+                 cours : Travail collaboratif
+                 code du cours : Mgt1
+                 durée du cours : 2h/jour
+               - id: 7
+                 name: Baky Harry
+                 cours : System d'exploitation
+                 code du cours : sys1
+                 durée du cours : 2h/jour
+               - id: 8
+                 name: Lou Maurica
+                 cours : Cloude
+                 code du cours : sys2
+                 durée du cours : 2h/jour
     post:
-      operationId: createStudent
-      description: Create a new student
+      operationId: createTeacher
+      description: Create a new teacher
       requestBody:
         required: true
         content:
@@ -28,34 +67,97 @@ paths:
               properties:
                  id:
                   type: integer
-                  default : 1
                  name:
                   type: string
-                  default : Ronaldino
-                 birthdate:
+                 cours:
                    type: string
-                   default : "9/4/2003"
+                 code du cours :
+                  type: string
+                 durée du cours : 
+                  type: string
+              example :
+                - id: 9
+                  name: Lou Maurica
+                  cours : Intelligence artificielle
+                  code du cours : IA1
+                  durée du cours : 2h/jour 
+                  
                  
       responses:
         '201':
-          description: Student created
+          description: Student added with success
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/student"
-        '400':
-          description: Bad request
-components:
-  schemas:
-    student:
-      type: object
-      properties:
-        id:
-          type: integer
-          default : 1
-        name:
-          type: string
-          default : Ronaldino
-        birthdate:
-          type: string
-          default : "9/4/2003"
+               type: object
+               properties:
+                  id:
+                   type: integer
+                  name:
+                   type: string
+                  cours:
+                   type: string
+                  code du cours :
+                   type: string
+                  durée du cours : 
+                   type: string
+              example :
+                - id: 9
+                  name: Lou Maurica
+                  cours : Intelligence artificielle
+                  code du cours : IA1
+                  durée du cours : 2h/jour  
+  /Teacher/id:      
+    delete:
+          operationId: deleteTeacher
+          description: Delete a teacher
+          parameters:
+            - in: path
+              name: id
+              required: true
+              schema:
+                type: integer
+          responses:
+            '200':
+              description: Teacher deleted successfully
+            '404':
+              description: Teacher not found
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Teacher not found
+  /Teachers/{id}:
+    put:
+      description: Put a teacher
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Teacher found
+          content:
+            application/json:
+              example:
+                - id: 9
+                  name: Lou Maurica
+                  cours : Intelligence artificielle
+                  code du cours : IA1
+                  durée du cours : 2h/jour
+     
+        '404':
+          description: Teacher not found
+          content:
+            application/json:
+             schema :
+              type: object
+              properties:
+                 message:
+                  type: string
+                  example : Teacher not found
